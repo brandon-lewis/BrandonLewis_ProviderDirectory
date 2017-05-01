@@ -1,0 +1,48 @@
+<html ng-app="providerDirectory">
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+	<script src="controller.js"></script>
+	<link rel="stylesheet" href="styles.css"/>
+</head>
+<body ng-controller="mainCtrl">
+	<h1>Provider Directory</h1>
+	<p>v2.0</p>
+	<div class="{{ctrlTest}}">{{ctrlTest}}</div><br>
+	
+	<div class="createForm">
+		<div>Create Provider</div>
+		<div>
+			<label for="lastName">Last Name</label>
+			<input id="lastName" type="text">
+		</div>
+		
+		<div>
+			<label for="firstName">First Name</label>
+			<input id="firstName" type="text">
+		</div>
+		
+		<div>
+			<label for="email">Email</label>
+			<input id="email" type="text">
+		</div>
+		
+		<div>
+			<label for="specialty">Specialty</label>
+			<input id="specialty" type="text">
+		</div>
+		
+		<div>
+			<label for="practiceName">Practice Name</label>
+			<input id="practiceName" type="text">
+		</div>
+		
+		<input type="submit"/>
+	</div>
+	
+	<h4>Provider List</h4>
+	<div class="providers" ng-repeat="provider in providers">
+		<div style="display:inline;">{{provider.first_name}} {{provider.last_name}} of {{provider.practice_name}}, {{provider.email_address}}</div>
+		<div style="float:right;">{{provider.specialty}}</div>
+	</div>
+</body>
+</html>
