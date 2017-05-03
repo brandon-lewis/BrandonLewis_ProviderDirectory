@@ -9,87 +9,88 @@
 	<link rel="stylesheet" href="styles.css"/>
 	<link rel="stylesheet" href="bootstrap.min.css"/>
 </head>
-<body ng-controller="mainCtrl">
+<body ng-controller="providerCtrl">
 	<div class="pageHeader">Provider Directory<span>v2.0</span></div>
 	
 	<div class="flexContainer">
 		<div class="panel panel-info">
-		<div class="panel-heading">Create Provider</div>
-		<form class="panel-body" name="createProviderForm">
-			<div class="providerInfo">
-				<label for="firstName">First Name</label>
-				<input id="firstName" type="text" ng-model="newFirstName" required>
-			</div>
-			
-			<div class="providerInfo">
-				<label for="lastName">Last Name</label>
-				<input id="lastName" type="text" ng-model="newLastName" required>
-			</div>
-			
-			<div class="providerInfo">
-				<label for="email">Email</label>
-				<input id="email" type="email" ng-model="newEmail" required>
-			</div>
-			
-			<div class="providerInfo">
-				<label for="specialty">Specialty</label>
-				<input id="specialty" type="text" ng-model="newSpecialty">
-			</div>
-			
-			<div class="providerInfo">
-				<label for="practiceName">Practice Name</label>
-				<input id="practiceName" type="text" ng-model="newPractice">
-			</div>
-			
-			<button ng-click="createProvider()" ng-disabled="!createProviderForm.$valid" class="btn btn-sm btn-primary">Create</button>
-		</form>
+			<div class="panel-heading">Create Provider</div>
+			<form class="panel-body" name="createProviderForm">
+				<div class="providerInfo">
+					<label for="firstName">First Name</label>
+					<input id="firstName" type="text" ng-model="newFirstName" required>
+				</div>
+				
+				<div class="providerInfo">
+					<label for="lastName">Last Name</label>
+					<input id="lastName" type="text" ng-model="newLastName" required>
+				</div>
+				
+				<div class="providerInfo">
+					<label for="email">Email</label>
+					<input id="email" type="email" ng-model="newEmail" required>
+				</div>
+				
+				<div class="providerInfo">
+					<label for="specialty">Specialty</label>
+					<input id="specialty" type="text" ng-model="newSpecialty">
+				</div>
+				
+				<div class="providerInfo">
+					<label for="practiceName">Practice Name</label>
+					<input id="practiceName" type="text" ng-model="newPractice">
+				</div>
+				
+				<button ng-click="createProvider()" ng-disabled="!createProviderForm.$valid" class="btn btn-sm btn-primary">Create</button>
+			</form>
 		</div>
 		
 		<div class="panel panel-primary" style="min-width:700px;resize:horizontal;overflow-x:auto;">
-		<div class="panel-heading">Provider List</div>
-		<div class="panel-body">
-			<div style="display:flex;flex-direction:row;justify-content:space-between;align-items:center;">
-				<div class="input-group" style="width:250px">
-					<input type="text" class="form-control" placeholder="Search for..." ng-model="searchText"
-						uib-typeahead="provider.first_name for provider in providers | filter:$viewValue | limitTo:8">
-					<span class="input-group-btn">
-						<button class="btn btn-primary" type="button">Search</button>
-					</span>
-				</div>
-    
-    			<div style="display:flex;align-items:center;">
-				<label for="sortSelect" style="margin-right:10px;">Sort By:</label>
-				<select id="sortSelect" ng-model="sortField" class="form-control" style="width:150px;margin-right:10px;">
-					<option value="first_name">First Name</option>
-					<option value="last_name">Last Name</option>
-					<option value="email_address">Email</option>
-					<option value="practice_name">Practice</option>
-					<option value="specialty">Specialty</option>
-				</select>
-				
-				<div class="btn-group">
-					<label class="btn btn-sm btn-primary" ng-model="sortOrder" uib-btn-radio="'asc'"><span class='btnAsc'></span></label>
-					<label class="btn btn-sm btn-primary" ng-model="sortOrder" uib-btn-radio="'desc'"><span class='btnDesc'></span></label>
-				</div>
-				</div>
-			</div>
-			<div style="height:400px;overflow-y:scroll;margin-bottom:10px;margin-top:10px;border:1px solid darkgray;">
-			<div ng-repeat="provider in providers | orderBy:((sortOrder == 'asc' ? '' : '-') + sortField)" class="providers">
-				<input type="checkbox" ng-click="toggleRemovalStatus(provider)" />
-				<div style="width:100%;">
-					<div style="display:flex;justify-content:space-between;font-weight:bold;">
-						<span>{{provider.last_name}}, {{provider.first_name}}</span>
-						<span>{{provider.specialty}}</span>
+			<div class="panel-heading">Provider List</div>
+			<div class="panel-body">
+				<div style="display:flex;flex-direction:row;justify-content:space-between;align-items:center;">
+					<div class="input-group" style="width:250px">
+						<input type="text" class="form-control" placeholder="Search for..." ng-model="providerSearch"
+							uib-typeahead="(pro.last_name + ', ' + pro.first_name) as (pro.last_name + ', ' + pro.first_name + ' (' + pro.specialty + ' at ' + pro.practice_name +')')
+								for pro in providers | filter:$viewValue | limitTo:8">
+						<span class="input-group-btn">
+							<a class="btn btn-primary" role="button" href="#{{providerSearch}}">Find</a>
+						</span>
 					</div>
-					<div style="display:flex;justify-content:space-between;">
-						<span>{{provider.email_address}}</span>
-						<span>{{provider.practice_name}}</span>
+	    
+	    			<div style="display:flex;align-items:center;">
+						<label for="sortSelect" style="margin-right:10px;">Sort By:</label>
+						<select id="sortSelect" ng-model="sortField" class="form-control" style="width:150px;margin-right:10px;">
+							<option value="first_name">First Name</option>
+							<option value="last_name">Last Name</option>
+							<option value="email_address">Email</option>
+							<option value="practice_name">Practice</option>
+							<option value="specialty">Specialty</option>
+						</select>
+						
+						<div class="btn-group">
+							<label class="btn btn-sm btn-primary" ng-model="sortOrder" uib-btn-radio="'asc'"><span class='btnAsc'></span></label>
+							<label class="btn btn-sm btn-primary" ng-model="sortOrder" uib-btn-radio="'desc'"><span class='btnDesc'></span></label>
+						</div>
 					</div>
 				</div>
+				<div style="height:400px;overflow-y:scroll;margin-bottom:10px;margin-top:10px;border:1px solid darkgray;">
+					<div ng-repeat="provider in providers | orderBy:((sortOrder == 'asc' ? '' : '-') + sortField)" class="providers">
+						<input type="checkbox" ng-click="toggleRemovalStatus(provider)" />
+						<div style="width:100%;" id="{{provider.last_name + ', ' + provider.first_name}}">
+							<div style="display:flex;justify-content:space-between;font-weight:bold;">
+								<span>{{provider.last_name}}, {{provider.first_name}}</span>
+								<span>{{provider.specialty}}</span>
+							</div>
+							<div style="display:flex;justify-content:space-between;">
+								<span>{{provider.email_address}}</span>
+								<span>{{provider.practice_name}}</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<button class="btn btn-sm btn-danger" ng-click="removeSelectedProviders()">Remove</button>
 			</div>
-			</div>
-			<button class="btn btn-sm btn-danger" ng-click="removeSelectedProviders()">Remove</button>
-		</div>
 		</div>
 	</div>
 </body>

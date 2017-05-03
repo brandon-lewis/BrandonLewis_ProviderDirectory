@@ -1,6 +1,6 @@
 var app = angular.module("providerDirectory", ['ui.bootstrap']);
 
-app.controller("mainCtrl", function($scope) {
+app.controller("providerCtrl", function($scope) {
 	
 	$scope.providers = [
 		{"last_name": "Harris", "first_name": "Mike", "email_address": "mharris@updox.com", "specialty": "Pediatrics", "practice_name": "Harris Pediatrics"},
