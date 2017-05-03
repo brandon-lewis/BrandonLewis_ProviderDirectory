@@ -1,4 +1,4 @@
-var app = angular.module("providerDirectory", []);
+var app = angular.module("providerDirectory", ['ui.bootstrap']);
 
 app.controller("mainCtrl", function($scope) {
 	
@@ -12,6 +12,8 @@ app.controller("mainCtrl", function($scope) {
 	];
 	
 	$scope.upForRemoval = [];
+	$scope.sortField = 'first_name';
+	$scope.sortOrder = 'asc';
 	
 	$scope.toggleRemovalStatus = function(provider) {
 		if($scope.upForRemoval.indexOf(provider) == -1) {
@@ -21,7 +23,7 @@ app.controller("mainCtrl", function($scope) {
 		}
 	}
 	
-	$scope.removeProviders = function() {
+	$scope.removeSelectedProviders = function() {
 		$scope.providers = $scope.providers.filter(function(provider) {
 			return $scope.upForRemoval.indexOf(provider) == -1;
 		});

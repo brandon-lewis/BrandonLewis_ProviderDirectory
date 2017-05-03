@@ -1,5 +1,5 @@
 body {
-	background-color: lightgray;
+	background-color: lightgray !important;
     font-family:Lucida Sans Unicode;
     font-size:14px;
 }
@@ -12,18 +12,6 @@ body {
 	color:#666;
 	display:block;
 	font-size:16px;
-}
-.containerHeader {
-	border:2px solid darkgray;
-	border-bottom:none;
-	padding:5px;
-	background-color:lightblue;
-	font-weight:bold;
-}
-.containerBody {
-	border:2px solid darkgray;
-	padding:5px;
-	background-color:white;
 }
 .providersContainer {
 	border:2px solid darkgray;
@@ -47,9 +35,23 @@ body {
 	display:flex;
 	flex-direction:row;
 }
-.container {
-	margin:10px;
+.flexContainer > div {
+	margin-left:10px;
+	margin-right:10px;
 }
 .providerInfo {
 	margin-bottom:10px;
+}
+input[type=checkbox]
+{
+	width:18px;
+	height:18px;
+	align-self:center;
+	margin-right:10px !important;
+}
+.btnAsc:after {
+	 content: '\25b2'
+}
+.btnDesc:after {
+	 content: '\25bc'
 }
