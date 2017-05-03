@@ -5,44 +5,61 @@
 	<link rel="stylesheet" href="styles.css"/>
 </head>
 <body ng-controller="mainCtrl">
-	<h1>Provider Directory</h1>
-	<p>v2.0</p>
-	<div class="{{ctrlTest}}">{{ctrlTest}}</div><br>
+	<div class="pageHeader">Provider Directory<span>v2.0</span></div>
 	
-	<div class="createForm">
-		<div>Create Provider</div>
-		<div>
-			<label for="lastName">Last Name</label>
-			<input id="lastName" type="text">
+	<div class="flexContainer">
+		<div class="container">
+		<div class="containerHeader">Create Provider</div>
+		<div class="containerBody">
+			<div class="providerInfo">
+				<label for="firstName">First Name</label>
+				<input id="firstName" type="text" ng-model="newFirstName">
+			</div>
+			
+			<div class="providerInfo">
+				<label for="lastName">Last Name</label>
+				<input id="lastName" type="text" ng-model="newLastName">
+			</div>
+			
+			<div class="providerInfo">
+				<label for="email">Email</label>
+				<input id="email" type="text" ng-model="newEmail">
+			</div>
+			
+			<div class="providerInfo">
+				<label for="specialty">Specialty</label>
+				<input id="specialty" type="text" ng-model="newSpecialty">
+			</div>
+			
+			<div class="providerInfo">
+				<label for="practiceName">Practice Name</label>
+				<input id="practiceName" type="text" ng-model="newPractice">
+			</div>
+			
+			<button ng-click="createProvider()">Create</button>
+		</div>
 		</div>
 		
-		<div>
-			<label for="firstName">First Name</label>
-			<input id="firstName" type="text">
+		<div class="container" style="flex-grow:2">
+		<div class="containerHeader">Provider List</div>
+		<div class="containerBody">
+			<div>Sort By:
+				<select>
+					<option value="firstName">First Name</option>
+					<option value="lastName">Last Name</option>
+					<option value="email">Email</option>
+					<option value="practice">Practice</option>
+					<option value="specialty">Specialty</option>
+				</select>
+			</div>
+			<div ng-repeat="provider in providers" class="providers">
+				<input type="checkbox" style="margin-right:10px;" ng-click="toggleRemovalStatus(provider)"/>
+				<span style="flex-grow:2"><b>{{provider.last_name}}, {{provider.first_name}}</b><br>{{provider.email_address}}</span>
+				<span style="text-align:right;">{{provider.specialty}}<br>{{provider.practice_name}}</span>
+			</div>
+			<button ng-click="removeProviders()">Remove</button>
 		</div>
-		
-		<div>
-			<label for="email">Email</label>
-			<input id="email" type="text">
 		</div>
-		
-		<div>
-			<label for="specialty">Specialty</label>
-			<input id="specialty" type="text">
-		</div>
-		
-		<div>
-			<label for="practiceName">Practice Name</label>
-			<input id="practiceName" type="text">
-		</div>
-		
-		<input type="submit"/>
-	</div>
-	
-	<h4>Provider List</h4>
-	<div class="providers" ng-repeat="provider in providers">
-		<div style="display:inline;">{{provider.first_name}} {{provider.last_name}} of {{provider.practice_name}}, {{provider.email_address}}</div>
-		<div style="float:right;">{{provider.specialty}}</div>
 	</div>
 </body>
 </html>
